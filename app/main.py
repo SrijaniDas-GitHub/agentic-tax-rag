@@ -32,7 +32,7 @@ import streamlit as st
 
 from agents.carry import carry
 from agents.planner import coverage_sentence
-from app.render import no_math
+from app.render import no_math, without_sources
 from core.llm import TPM_LIMIT
 
 TODAY = date.today()
@@ -86,6 +86,12 @@ def citation_chips(citations: list[dict]) -> None:
         label = f"[{c['n']}] {c['label']}"
         chips.append(f"[`{label}`]({c['url']})" if c.get("url") else f"`{label}`")
     st.markdown("&nbsp;&nbsp;".join(chips), unsafe_allow_html=True)
+
+
+def show_answer(text: str, citations: list[dict]) -> None:
+    """The answer, with its sources shown once: as chips, not also as text."""
+    st.markdown(no_math(without_sources(text) if citations else text))
+    citation_chips(citations)
 
 
 def _plan_panel(state: dict) -> None:
@@ -327,8 +333,7 @@ def main() -> None:
         with st.chat_message("user"):
             st.markdown(no_math(turn["question"]))
         with st.chat_message("assistant"):
-            st.markdown(no_math(turn["answer"]))
-            citation_chips(turn["state"].get("citations") or [])
+            show_answer(turn["answer"], turn["state"].get("citations") or [])
             trace_panel(turn["state"])
 
     typed = st.chat_input("Ask about US or UK income tax...")
@@ -341,8 +346,8 @@ def main() -> None:
     with st.chat_message("assistant"):
         with st.spinner("Planning, searching, checking..."):
             state = answer(question)
-        st.markdown(no_math(state.get("final_answer") or "(no answer produced)"))
-        citation_chips(state.get("citations") or [])
+        show_answer(state.get("final_answer") or "(no answer produced)",
+                    state.get("citations") or [])
         trace_panel(state)
 
     st.session_state["turns"].append({

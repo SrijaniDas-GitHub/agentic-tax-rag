@@ -35,9 +35,15 @@ def test_carries_the_resolved_filters_and_the_previous_question_as_subject():
     ]
 
 
-def test_a_clarification_carries_nothing():
-    assert carry({"plan": Plan(intent="needs_clarification",
-                               clarifying_question="Which year?")}) is None
+def test_a_clarification_carries_the_question_it_is_waiting_on():
+    """A reply like "2023" must reach the planner with the question it answers."""
+    carried = carry({"plan": Plan(intent="needs_clarification",
+                                  clarifying_question="Which tax year?"),
+                     "user_query": "What's the standard deduction?"})
+
+    assert carried["previous_question"] == "What's the standard deduction?"
+    assert carried["clarifying_question"] == "Which tax year?"
+    assert carried["resolved"] == []
 
 
 def test_a_refusal_carries_nothing_even_though_it_has_sub_queries():
@@ -78,9 +84,36 @@ def test_carried_context_names_the_subject_and_overrides_the_clarify_rule():
     assert "do not ask for it" in text
 
 
+def test_a_reply_to_a_clarification_is_planned_as_the_question_it_answers():
+    text = carried_context(carry({
+        "plan": Plan(intent="needs_clarification",
+                     clarifying_question="England/Wales/Northern Ireland or Scotland?"),
+        "user_query": "I earn £50,000 a year - which tax band am I in for 2024-25?",
+    }))
+
+    assert "I earn £50,000 a year - which tax band am I in for 2024-25?" in text
+    assert "You asked: England/Wales/Northern Ireland or Scotland?" in text
+    assert "plan the previous question with the answer filled in" in text
+    assert "do not ask for it again" in text
+
+
 def test_dollar_figures_are_escaped_so_markdown_does_not_typeset_them():
     from app.render import no_math
 
     q07 = "is $14,600 [1]. The UK is £12,570 [2]. The US ($14,600) is larger"
     assert no_math(q07) == r"is \$14,600 [1]. The UK is £12,570 [2]. The US (\$14,600) is larger"
     assert no_math("£12,570, no dollars") == "£12,570, no dollars"
+
+
+def test_the_ui_shows_sources_once_as_chips_not_also_as_text():
+    from app.render import without_sources
+
+    answer = ("It is $14,600 [1].\n\nAssumptions:\n- US 2024: a note\n\n"
+              "Sources:\n[1] IRS Publication 17 (2024), p.96\n\n"
+              "Grounding check: 1 figure(s) could not be verified")
+    assert without_sources(answer) == (
+        "It is $14,600 [1].\n\nAssumptions:\n- US 2024: a note\n\n"
+        "Grounding check: 1 figure(s) could not be verified")
+    assert without_sources("No sources here.") == "No sources here."
+
+

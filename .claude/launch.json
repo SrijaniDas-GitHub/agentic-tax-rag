@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "tax-rag-replay",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "set GROQ_API_KEY=replay-no-network&& uv run streamlit run app/main.py --server.port 8599 --server.headless true"],
+      "port": 8599
+    }
+  ]
+}

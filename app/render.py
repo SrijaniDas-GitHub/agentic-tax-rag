@@ -11,3 +11,13 @@ def no_math(text: str) -> str:
     two dollar figures would otherwise render incorrectly.
     """
     return text.replace("$", "\\$")
+
+
+def without_sources(text: str) -> str:
+    """Drop the `Sources:` paragraph from a rendered answer.
+
+    The UI lists the same sources as linked chips under the answer, so showing
+    the paragraph too prints every source twice. The paragraph stays in
+    `final_answer` for the CLI and the eval.
+    """
+    return "\n\n".join(p for p in text.split("\n\n") if not p.startswith("Sources:\n"))

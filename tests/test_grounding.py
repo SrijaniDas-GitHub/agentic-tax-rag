@@ -142,6 +142,15 @@ def test_markers_are_numbered_by_first_use_and_deduplicated():
     assert marker[a.chunk_id] == 1 and marker[b.chunk_id] == 2
 
 
+def test_two_chunks_of_one_section_share_a_marker():
+    """`[1] ..., §1 [2] ..., §1` reads as two sources; it is one."""
+    a, b = uk(chunk_id="uk_rates_2024:1:0", page=1), uk(chunk_id="uk_rates_2024:1:1", page=1)
+    listed, marker = numbered([a, b, us()])
+    assert [(c["n"], c["label"]) for c in listed] == [
+        (1, "gov.uk rates, §1"), (2, "IRS Publication 17 (2024), p.96")]
+    assert marker[a.chunk_id] == marker[b.chunk_id] == 1
+
+
 # --------------------------------------------- why a number is ungrounded --
 #
 # Ungrounded numbers are classified as derived arithmetic (sum or difference of two

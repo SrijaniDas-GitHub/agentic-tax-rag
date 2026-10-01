@@ -30,6 +30,7 @@ from agents.nodes import (
     synthesize_node,
     verify_node,
 )
+from agents.planner import resolve_plan
 from agents.state import initial_state
 from core.llm import reset_client, set_client
 from core.paths import BM25_PATH, CHROMA_DIR
@@ -403,6 +404,20 @@ async def test_refuse_node_names_the_reason_and_what_the_corpus_does_hold():
     assert "personalised tax advice" in answer
     assert "rates and thresholds" in answer      # offers the figures instead
     assert "US 2023, 2024" in answer
+
+
+async def test_an_advice_refusal_offers_the_factual_questions_instead():
+    plan = resolve_plan(DraftPlan(
+        intent="out_of_scope",
+        sub_queries=[PlannedSubQuery(question="What is the standard deduction?",
+                                     country="US", year_text="")],
+        out_of_scope_reason="I cannot provide personalized tax advice."),
+        today=TODAY, question="Should I itemise?")
+    answer = (await refuse_node(state_with(plan=plan)))["final_answer"]
+
+    assert "- What is the standard deduction?" in answer
+    assert "personalized" not in answer      # the planner's restatement is not echoed
+    assert answer.index("What is the standard deduction?") < answer.index("I hold")
 
 
 async def test_refuse_node_handles_the_insufficient_evidence_route():

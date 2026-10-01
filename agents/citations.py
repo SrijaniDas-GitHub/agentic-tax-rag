@@ -41,14 +41,22 @@ def citation_dict(passage: Passage) -> dict:
 def numbered(passages: list[Passage]) -> tuple[list[dict], dict[str, int]]:
     """Number the cited passages [1], [2], ... in order of first use.
 
+    Two chunks of the same page or section share one number: a reader cannot tell
+    `[1] ..., §1` from `[2] ..., §1` apart, so listing both is noise.
+
     Returns the citation list and a `chunk_id -> marker number` map.
     """
     order: dict[str, int] = {}
+    by_label: dict[str, int] = {}
     out: list[dict] = []
     for passage in passages:
         if passage.chunk_id in order:
             continue
-        order[passage.chunk_id] = len(out) + 1
+        label = format_citation(passage)
+        if label in by_label:
+            order[passage.chunk_id] = by_label[label]
+            continue
+        order[passage.chunk_id] = by_label[label] = len(out) + 1
         entry = citation_dict(passage)
         entry["n"] = order[passage.chunk_id]
         out.append(entry)

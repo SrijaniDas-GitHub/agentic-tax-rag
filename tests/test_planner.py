@@ -172,6 +172,26 @@ def test_an_advice_refusal_stays_advice_even_when_it_names_a_missing_year():
     assert plan.refusal_reason == "personalised_advice"
 
 
+def test_an_advice_refusal_lists_the_planned_questions_not_the_planners_reason():
+    d = draft(("What is the standard deduction amount for a US taxpayer?", "US", ""),
+              ("What is the standard deduction amount for a US taxpayer?", "US", ""),
+              ("What are the itemized deduction limits?", "US", ""),
+              intent="out_of_scope",
+              out_of_scope_reason="I cannot provide personalized tax advice.")
+    plan = resolve_plan(d, today=TODAY, known=KNOWN, question="Should I itemise?")
+
+    assert plan.refusal_reason == "personalised_advice"
+    assert plan.refusal_detail.splitlines()[1:] == [
+        "- What is the standard deduction amount for a US taxpayer?",
+        "- What are the itemized deduction limits?",
+    ]
+
+    bare = resolve_plan(DraftPlan(intent="out_of_scope",
+                                  out_of_scope_reason="Asks for advice."),
+                        today=TODAY, known=KNOWN)
+    assert bare.refusal_reason == "personalised_advice" and bare.refusal_detail is None
+
+
 def test_a_refusal_with_no_resolvable_year_still_says_other():
     d = DraftPlan(intent="out_of_scope", out_of_scope_reason="Canada is not covered.")
     plan = resolve_plan(d, today=TODAY, known=KNOWN,

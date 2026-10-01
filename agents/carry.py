@@ -6,13 +6,25 @@ from __future__ import annotations
 def carry(state: dict) -> dict | None:
     """Return the previous turn's resolved filters and question for the next planner call.
 
-    Lets follow-ups like "and what about 2023?" inherit country and subject.
-    Clarifications and refusals carry nothing.
+    Lets follow-ups like "and what about 2023?" inherit country and subject. A
+    clarification carries the question it is waiting on, so a reply like "2023" or
+    "Scotland" is planned as that question with the gap filled. Refusals carry
+    nothing.
     """
     plan = state.get("plan")
-    if not plan or not plan.sub_queries:
+    if not plan:
         return None
-    if plan.intent in {"needs_clarification", "out_of_scope"}:
+    if plan.intent == "needs_clarification":
+        if not plan.clarifying_question:
+            return None
+        return {
+            "previous_question": state.get("user_query"),
+            "clarifying_question": plan.clarifying_question,
+            "countries": [],
+            "tax_years": [],
+            "resolved": [],
+        }
+    if not plan.sub_queries or plan.intent == "out_of_scope":
         return None
     return {
         "previous_question": state.get("user_query"),

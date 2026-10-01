@@ -75,6 +75,8 @@ def carried_context(carried: dict | None) -> str:
     """
     if not carried:
         return NO_PREVIOUS_TURN
+    if carried.get("clarifying_question"):
+        return _awaiting_answer(carried)
     resolved = ", ".join(
         f"{r['country']} {r['tax_year_label']}" for r in carried.get("resolved", [])
     ) or "nothing"
@@ -91,6 +93,22 @@ def carried_context(carried: dict | None) -> str:
         "tax year label above as `year_text`. A subject, country or year carried "
         "this way counts as stated: do not ask for it. If the new question stands "
         "on its own, ignore this block."
+    )
+
+
+def _awaiting_answer(carried: dict) -> str:
+    """The previous turn asked the user a clarifying question; this may be the reply."""
+    previous = carried.get("previous_question") or "(not recorded)"
+    return (
+        "## Previous turn - you asked the user a clarifying question\n\n"
+        f"Previous question: {previous}\n"
+        f"You asked: {carried['clarifying_question']}\n\n"
+        "If the new message answers that (\"2023\", \"Scotland\", \"the US\"), plan the "
+        "previous question with the answer filled in: write complete, self-contained "
+        "sub-queries for the previous question, and take `year_text` and country from "
+        "the previous question and the answer together. What the previous question "
+        "and the answer state counts as stated: do not ask for it again. If the new "
+        "message is a new question, ignore this block."
     )
 
 
@@ -147,13 +165,28 @@ def _clarify(question: str, note: str) -> Plan:
     )
 
 
-def _refuse(reason: str, detail: str) -> Plan:
+def _refuse(reason: str, detail: str | None) -> Plan:
     return Plan(intent="out_of_scope", refusal_reason=reason, refusal_detail=detail)
 
 
 def _refusal_reason_for(text: str | None) -> str:
     lowered = (text or "").lower()
     return "personalised_advice" if any(w in lowered for w in _ADVICE_WORDS) else "other"
+
+
+def _factual_questions(draft: DraftPlan) -> str | None:
+    """The advice refusal's detail: the factual sub-queries the planner drafted, as
+    questions the user can ask instead, or None if it drafted none.
+
+    Replaces the planner's own reason, which only restates the refusal
+    ("I cannot provide personalized tax advice.").
+    """
+    questions = list(dict.fromkeys(sq.question.strip() for sq in draft.sub_queries
+                                   if sq.question.strip()))
+    if not questions:
+        return None
+    return ("For example, you could ask one of these, with a tax year from the list "
+            "below:\n" + "\n".join(f"- {q}" for q in questions))
 
 
 def _not_held(resolved: ResolvedYear) -> str:
@@ -255,6 +288,8 @@ def resolve_plan(draft: DraftPlan, *, today: date,
 
     if draft.intent == "out_of_scope":
         reason = _refusal_reason_for(draft.out_of_scope_reason)
+        if reason == "personalised_advice":
+            return _refuse(reason, _factual_questions(draft))
         if reason == "other" and not draft.sub_queries and question:
             gap = _year_gap_in(question, today=today, known=known)
             if gap:

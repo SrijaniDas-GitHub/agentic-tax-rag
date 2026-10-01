@@ -24,7 +24,9 @@ You need [uv](https://docs.astral.sh/uv/) and a free Groq API key from
 have it.
 
 ```bash
-git clone https://github.com/SrijaniDas-GitHub/agentic-tax-rag.git && cd agentic-tax-rag && uv sync
+git clone https://github.com/SrijaniDas-GitHub/agentic-tax-rag.git
+cd agentic-tax-rag
+uv sync
 ```
 
 ```bash

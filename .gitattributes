@@ -1,0 +1,6 @@
+# chunks.jsonl is a committed build artefact compared across machines.
+# Without this, Git rewrites every line on checkout and the diff is the whole file.
+data/chunks.jsonl text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf

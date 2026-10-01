@@ -1,0 +1,147 @@
+{
+  "label": "q07_fix",
+  "generated": "2026-09-24 04:31 UTC",
+  "config": {
+    "orchestrator": "runner",
+    "model": "openai/gpt-oss-120b",
+    "fast_model": "openai/gpt-oss-20b",
+    "allow_fast_model": "1",
+    "diversify_by_page": false,
+    "paced": true,
+    "cold": true,
+    "only": "q07",
+    "gold_total": 12,
+    "today": "2026-09-20",
+    "commit": "ef837cc-dirty",
+    "followups": false
+  },
+  "aggregate": {
+    "n_questions": 1,
+    "n_attempted": 1,
+    "not_measured": [],
+    "n_answerable": 1,
+    "n_sub_queries": 2,
+    "filter_precision": 1.0,
+    "recall@8": 1.0,
+    "recall@8_attempt1": 1.0,
+    "answer_contains": 1.0,
+    "grounding_checked": 4,
+    "grounding_grounded": 4,
+    "grounding_violations": 0,
+    "violations_by_kind": {},
+    "behavioural_correct": 0,
+    "behavioural_n": 0,
+    "behavioural_in_gold": 0,
+    "behavioural_reason_correct": 0,
+    "retries_fired": 0,
+    "retries_recovered": 0,
+    "p50_latency_s": 3.48,
+    "max_latency_s": 3.48,
+    "tokens_total": 8100,
+    "errors": []
+  },
+  "latency": {
+    "cold_p50": 3.48,
+    "cold_max": 3.48,
+    "cached_p50": 0.17,
+    "cached_max": 0.17,
+    "paced_s": 0.0
+  },
+  "questions": [
+    {
+      "id": "q07",
+      "type": "compare_countries",
+      "question": "How does the US standard deduction for a single filer compare with the UK Personal Allowance for 2024?",
+      "expected_behavior": "answer",
+      "observed_behavior": "answer",
+      "behaviour_ok": true,
+      "behaviour_reason": null,
+      "behaviour_reason_ok": null,
+      "expected_filters": [
+        [
+          "US",
+          2024
+        ],
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "dispatched_filters": [
+        [
+          "US",
+          2024
+        ],
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "filters_ok": true,
+      "sub_queries": [
+        {
+          "label": "US/2024",
+          "question": "What is the standard deduction for a single filer in 2024?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What is the standard deduction for a single filer in 2024?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "us_p17_2024|95",
+            "us_p17_2024|98",
+            "us_p17_2024|95",
+            "us_p17_2024|96",
+            "us_p17_2024|96",
+            "us_p17_2024|96",
+            "us_p17_2024|98",
+            "us_p17_2024|96"
+          ]
+        },
+        {
+          "label": "UK/2024",
+          "question": "What is the Personal Allowance in 2024?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What is the Personal Allowance in 2024?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "uk_rates_2024|1",
+            "uk_rates_2024|1",
+            "uk_rates_2024|2",
+            "uk_rates_2024|4",
+            "uk_rates_2024|3",
+            "uk_rates_2024|7",
+            "uk_rates_2024|5",
+            "uk_rates_2024|3"
+          ]
+        }
+      ],
+      "expected_contains": [
+        "14,600",
+        "12,570"
+      ],
+      "missing_contains": [],
+      "contains_ok": true,
+      "grounding_checked": 4,
+      "grounding_grounded": 4,
+      "violations": [],
+      "total_ms": 3480.2,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 4253,
+        "openai/gpt-oss-20b": 3847
+      },
+      "paced_s": 0.0,
+      "final_answer": "The standard deduction for a single filer in 2024 is $14,600 [1]. The Personal Allowance for the 2024-25 tax year in the UK is \u00a312,570 [2]. The US standard deduction for a single filer ($14,600) is larger than the UK Personal Allowance (\u00a312,570) [1] [2].\n\nSources:\n[1] IRS Publication 17 (2024), p.96\n[2] Income Tax rates and allowances for current and previous tax years (2024-25), \u00a71",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    }
+  ]
+}

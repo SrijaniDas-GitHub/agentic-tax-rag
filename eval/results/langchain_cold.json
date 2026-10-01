@@ -1,0 +1,817 @@
+{
+  "label": "langchain_cold",
+  "generated": "2026-09-24 06:09 UTC",
+  "config": {
+    "orchestrator": "graph",
+    "model": "openai/gpt-oss-120b",
+    "fast_model": "openai/gpt-oss-20b",
+    "allow_fast_model": "1",
+    "diversify_by_page": false,
+    "paced": true,
+    "cold": true,
+    "only": "",
+    "gold_total": 12,
+    "today": "2026-09-20",
+    "commit": "a1b0625",
+    "followups": false
+  },
+  "aggregate": {
+    "n_questions": 12,
+    "n_attempted": 12,
+    "not_measured": [],
+    "n_answerable": 8,
+    "n_sub_queries": 12,
+    "filter_precision": 1.0,
+    "recall@8": 1.0,
+    "recall@8_attempt1": 0.833,
+    "answer_contains": 1.0,
+    "grounding_checked": 54,
+    "grounding_grounded": 54,
+    "grounding_violations": 0,
+    "violations_by_kind": {},
+    "behavioural_correct": 4,
+    "behavioural_n": 4,
+    "behavioural_in_gold": 4,
+    "behavioural_reason_correct": 4,
+    "retries_fired": 3,
+    "retries_recovered": 2,
+    "p50_latency_s": 2.85,
+    "max_latency_s": 8.63,
+    "tokens_total": 71361,
+    "errors": []
+  },
+  "latency": {
+    "cold_p50": 2.85,
+    "cold_max": 8.63,
+    "cached_p50": 0.09,
+    "cached_max": 0.25,
+    "paced_s": 282.3
+  },
+  "questions": [
+    {
+      "id": "q01",
+      "type": "lookup",
+      "question": "What is the 2024 standard deduction for a single filer?",
+      "expected_behavior": "answer",
+      "observed_behavior": "answer",
+      "behaviour_ok": true,
+      "behaviour_reason": null,
+      "behaviour_reason_ok": null,
+      "expected_filters": [
+        [
+          "US",
+          2024
+        ]
+      ],
+      "dispatched_filters": [
+        [
+          "US",
+          2024
+        ]
+      ],
+      "filters_ok": true,
+      "sub_queries": [
+        {
+          "label": "US/2024",
+          "question": "What is the standard deduction for a single filer?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What is the standard deduction for a single filer?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "us_p17_2024|98",
+            "us_p17_2024|96",
+            "us_p17_2024|95",
+            "us_p17_2024|96",
+            "us_p17_2024|98",
+            "us_p17_2024|95",
+            "us_p17_2024|95",
+            "us_p17_2024|96"
+          ]
+        }
+      ],
+      "expected_contains": [
+        "14,600"
+      ],
+      "missing_contains": [],
+      "contains_ok": true,
+      "grounding_checked": 1,
+      "grounding_grounded": 1,
+      "violations": [],
+      "total_ms": 3350.7,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 3720,
+        "openai/gpt-oss-20b": 2164
+      },
+      "paced_s": 0.0,
+      "final_answer": "The 2024 standard deduction for a single filer is $14,600 [1].\n\nSources:\n[1] IRS Publication 17 (2024), p.96",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    },
+    {
+      "id": "q02",
+      "type": "lookup",
+      "question": "What is the UK Personal Allowance for the 2024-25 tax year?",
+      "expected_behavior": "answer",
+      "observed_behavior": "answer",
+      "behaviour_ok": true,
+      "behaviour_reason": null,
+      "behaviour_reason_ok": null,
+      "expected_filters": [
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "dispatched_filters": [
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "filters_ok": true,
+      "sub_queries": [
+        {
+          "label": "UK/2024",
+          "question": "What is the UK Personal Allowance?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What is the UK Personal Allowance?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "uk_rates_2024|1",
+            "uk_rates_2024|2",
+            "uk_rates_2024|1",
+            "uk_rates_2024|4",
+            "uk_rates_2024|3",
+            "uk_rates_2024|3",
+            "uk_rates_2024|7",
+            "uk_rates_2024|5"
+          ]
+        }
+      ],
+      "expected_contains": [
+        "12,570"
+      ],
+      "missing_contains": [],
+      "contains_ok": true,
+      "grounding_checked": 1,
+      "grounding_grounded": 1,
+      "violations": [],
+      "total_ms": 2032.1,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 3371,
+        "openai/gpt-oss-20b": 1735
+      },
+      "paced_s": 2.7,
+      "final_answer": "The UK Personal Allowance for the 2024-25 tax year is \u00a312,570 [1] [2].\n\nSources:\n[1] Income Tax rates and allowances for current and previous tax years (2024-25), \u00a71\n[2] Income Tax rates and allowances for current and previous tax years (2024-25), \u00a71",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    },
+    {
+      "id": "q03",
+      "type": "lookup",
+      "question": "What are the income tax rates and bands in England for 2024-25?",
+      "expected_behavior": "answer",
+      "observed_behavior": "answer",
+      "behaviour_ok": true,
+      "behaviour_reason": null,
+      "behaviour_reason_ok": null,
+      "expected_filters": [
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "dispatched_filters": [
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "filters_ok": true,
+      "sub_queries": [
+        {
+          "label": "UK/2024",
+          "question": "What are the income tax rates and bands in England for 2024-25?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What are the income tax rates and bands in England for 2024-25?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "uk_rates_2024|4",
+            "uk_rates_2024|5",
+            "uk_rates_2024|7",
+            "uk_rates_2024|7",
+            "uk_rates_2024|5",
+            "uk_rates_2024|1",
+            "uk_rates_2024|6",
+            "uk_rates_2024|1"
+          ]
+        }
+      ],
+      "expected_contains": [
+        "40%",
+        "37,701",
+        "125,140"
+      ],
+      "missing_contains": [],
+      "contains_ok": true,
+      "grounding_checked": 9,
+      "grounding_grounded": 9,
+      "violations": [],
+      "total_ms": 2730.8,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 3725,
+        "openai/gpt-oss-20b": 1719
+      },
+      "paced_s": 26.1,
+      "final_answer": "In England for the 2024-25 tax year, the income tax rates are 0% on savings up to \u00a35,000, 20% on income up to \u00a337,700, 40% on income from \u00a337,701 to \u00a3125,140, and 45% on income over \u00a3125,141 [1].\n\nSources:\n[1] Income Tax rates and allowances for current and previous tax years (2024-25), \u00a75",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    },
+    {
+      "id": "q04",
+      "type": "lookup",
+      "question": "Show me the 2024 tax rate schedule for single filers.",
+      "expected_behavior": "answer",
+      "observed_behavior": "answer",
+      "behaviour_ok": true,
+      "behaviour_reason": null,
+      "behaviour_reason_ok": null,
+      "expected_filters": [
+        [
+          "US",
+          2024
+        ]
+      ],
+      "dispatched_filters": [
+        [
+          "US",
+          2024
+        ]
+      ],
+      "filters_ok": true,
+      "sub_queries": [
+        {
+          "label": "US/2024",
+          "question": "What is the tax rate schedule for single filers in the US for 2024?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What is the tax rate schedule for single filers in the US for 2024?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "us_p17_2024|128",
+            "us_p17_2024|9",
+            "us_p17_2024|9",
+            "us_p17_2024|9",
+            "us_p17_2024|12",
+            "us_p17_2024|12",
+            "us_p17_2024|25",
+            "us_p17_2024|95"
+          ]
+        }
+      ],
+      "expected_contains": [
+        "37%",
+        "609,350"
+      ],
+      "missing_contains": [],
+      "contains_ok": true,
+      "grounding_checked": 31,
+      "grounding_grounded": 31,
+      "violations": [],
+      "total_ms": 3149.1,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 4196,
+        "openai/gpt-oss-20b": 2266
+      },
+      "paced_s": 28.3,
+      "final_answer": "The 2024 tax rate schedule for single filers is: 10% on income up to $11,600; 12% on income over $11,600 up to $47,150 with $1,160.00 plus 12%; 22% on income over $47,150 up to $100,525 with $5,426.00 plus 22%; 24% on income over $100,525 up to $191,950 with $17,168.50 plus 24%; 32% on income over $191,950 up to $243,725 with $39,110.50 plus 32%; 35% on income over $243,725 up to $609,350 with $55,678.50 plus 35%; 37% on income over $609,350 with $183,647.25 plus 37% [1].\n\nSources:\n[1] IRS Publication 17 (2024), p.126",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    },
+    {
+      "id": "q05",
+      "type": "compare_years",
+      "question": "Did the top rate of income tax in Scotland change between 2023-24 and 2024-25?",
+      "expected_behavior": "answer",
+      "observed_behavior": "answer",
+      "behaviour_ok": true,
+      "behaviour_reason": null,
+      "behaviour_reason_ok": null,
+      "expected_filters": [
+        [
+          "UK",
+          2023
+        ],
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "dispatched_filters": [
+        [
+          "UK",
+          2023
+        ],
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "filters_ok": true,
+      "sub_queries": [
+        {
+          "label": "UK/2023",
+          "question": "What was the top rate of income tax in Scotland for the tax year 2023-24?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What was the top rate of income tax in Scotland for the tax year 2023-24?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "uk_rates_2023|6",
+            "uk_rates_2023|7",
+            "uk_rates_2023|6",
+            "uk_rates_2023|4",
+            "uk_rates_2023|7",
+            "uk_rates_2023|5",
+            "uk_rates_2023|2",
+            "uk_rates_2023|1"
+          ]
+        },
+        {
+          "label": "UK/2024",
+          "question": "What was the top rate of income tax in Scotland for the tax year 2024-25?",
+          "attempts": 2,
+          "sufficient": false,
+          "queries_tried": [
+            "What was the top rate of income tax in Scotland for the tax year 2024-25?",
+            "Scotland top rate 2024 to 2025"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "uk_rates_2024|6",
+            "uk_rates_2024|5",
+            "uk_rates_2024|6",
+            "uk_rates_2024|7",
+            "uk_rates_2024|1",
+            "uk_rates_2024|3",
+            "uk_rates_2024|7",
+            "uk_rates_2024|4"
+          ]
+        }
+      ],
+      "expected_contains": [
+        "47%",
+        "48%"
+      ],
+      "missing_contains": [],
+      "contains_ok": true,
+      "grounding_checked": 4,
+      "grounding_grounded": 4,
+      "violations": [],
+      "total_ms": 3922.4,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 4310,
+        "openai/gpt-oss-20b": 5462
+      },
+      "paced_s": 35.0,
+      "final_answer": "The top rate of income tax in Scotland for the 2023-24 tax year was 47% [1]. The top rate of income tax in Scotland for the 2024-25 tax year was 48% [2]. Thus, the top rate increased from 47% to 48% between 2023-24 and 2024-25 [1] [2].\n\nSources:\n[1] Income Tax rates and allowances for current and previous tax years (2023-24), \u00a76\n[2] Income Tax rates and allowances for current and previous tax years (2024-25), \u00a76",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    },
+    {
+      "id": "q06",
+      "type": "compare_years",
+      "question": "Did the top tax bracket percentage for a single person change between 2023 and 2024?",
+      "expected_behavior": "answer",
+      "observed_behavior": "answer",
+      "behaviour_ok": true,
+      "behaviour_reason": null,
+      "behaviour_reason_ok": null,
+      "expected_filters": [
+        [
+          "US",
+          2023
+        ],
+        [
+          "US",
+          2024
+        ]
+      ],
+      "dispatched_filters": [
+        [
+          "US",
+          2023
+        ],
+        [
+          "US",
+          2024
+        ]
+      ],
+      "filters_ok": true,
+      "sub_queries": [
+        {
+          "label": "US/2023",
+          "question": "What was the top tax bracket percentage for a single filer in the US for 2023?",
+          "attempts": 2,
+          "sufficient": true,
+          "queries_tried": [
+            "What was the top tax bracket percentage for a single filer in the US for 2023?",
+            "2023 Tax Rate Schedules single filer top bracket"
+          ],
+          "hit_attempt1": false,
+          "hit_final": true,
+          "pages_final": [
+            "us_p17_2023|127",
+            "us_p17_2023|8",
+            "us_p17_2023|127",
+            "us_p17_2023|96",
+            "us_p17_2023|27",
+            "us_p17_2023|9",
+            "us_p17_2023|95",
+            "us_p17_2023|96"
+          ]
+        },
+        {
+          "label": "US/2024",
+          "question": "What was the top tax bracket percentage for a single filer in the US for 2024?",
+          "attempts": 2,
+          "sufficient": true,
+          "queries_tried": [
+            "What was the top tax bracket percentage for a single filer in the US for 2024?",
+            "2024 Tax Rate Schedules single filer top bracket"
+          ],
+          "hit_attempt1": false,
+          "hit_final": true,
+          "pages_final": [
+            "us_p17_2024|128",
+            "us_p17_2024|96",
+            "us_p17_2024|9",
+            "us_p17_2024|128",
+            "us_p17_2024|27",
+            "us_p17_2024|109",
+            "us_p17_2024|96",
+            "us_p17_2024|8"
+          ]
+        }
+      ],
+      "expected_contains": [
+        "37%"
+      ],
+      "missing_contains": [],
+      "contains_ok": true,
+      "grounding_checked": 1,
+      "grounding_grounded": 1,
+      "violations": [],
+      "total_ms": 8629.1,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 4593,
+        "openai/gpt-oss-20b": 9135
+      },
+      "paced_s": 32.9,
+      "final_answer": "The top tax bracket percentage for a single filer was 37% in both 2023 and 2024, so it did not change between those years [1] [2].\n\nSources:\n[1] IRS Publication 17 (2023), p.125\n[2] IRS Publication 17 (2024), p.126",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    },
+    {
+      "id": "q07",
+      "type": "compare_countries",
+      "question": "How does the US standard deduction for a single filer compare with the UK Personal Allowance for 2024?",
+      "expected_behavior": "answer",
+      "observed_behavior": "answer",
+      "behaviour_ok": true,
+      "behaviour_reason": null,
+      "behaviour_reason_ok": null,
+      "expected_filters": [
+        [
+          "US",
+          2024
+        ],
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "dispatched_filters": [
+        [
+          "US",
+          2024
+        ],
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "filters_ok": true,
+      "sub_queries": [
+        {
+          "label": "US/2024",
+          "question": "What is the standard deduction for a single filer in the US for 2024?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What is the standard deduction for a single filer in the US for 2024?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "us_p17_2024|95",
+            "us_p17_2024|96",
+            "us_p17_2024|98",
+            "us_p17_2024|95",
+            "us_p17_2024|96",
+            "us_p17_2024|96",
+            "us_p17_2024|95",
+            "us_p17_2024|98"
+          ]
+        },
+        {
+          "label": "UK/2024",
+          "question": "What is the Personal Allowance in the UK for 2024?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What is the Personal Allowance in the UK for 2024?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "uk_rates_2024|1",
+            "uk_rates_2024|1",
+            "uk_rates_2024|2",
+            "uk_rates_2024|3",
+            "uk_rates_2024|4",
+            "uk_rates_2024|6",
+            "uk_rates_2024|7",
+            "uk_rates_2024|3"
+          ]
+        }
+      ],
+      "expected_contains": [
+        "14,600",
+        "12,570"
+      ],
+      "missing_contains": [],
+      "contains_ok": true,
+      "grounding_checked": 4,
+      "grounding_grounded": 4,
+      "violations": [],
+      "total_ms": 2973.7,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 4175,
+        "openai/gpt-oss-20b": 3883
+      },
+      "paced_s": 60.0,
+      "final_answer": "The standard deduction for a single filer in the United States for 2024 is $14,600 [1]. The Personal Allowance in the United Kingdom for the 2024-25 tax year is \u00a312,570 [2]. The U.S. standard deduction of $14,600 is higher in nominal amount than the U.K. Personal Allowance of \u00a312,570 [1] [2].\n\nNote:\n- The amounts are expressed in different currencies and are not directly comparable without conversion.\n\nSources:\n[1] IRS Publication 17 (2024), p.96\n[2] Income Tax rates and allowances for current and previous tax years (2024-25), \u00a71",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    },
+    {
+      "id": "q08",
+      "type": "compare_countries",
+      "question": "What is the highest marginal income tax rate in the US and in England for 2024?",
+      "expected_behavior": "answer",
+      "observed_behavior": "answer",
+      "behaviour_ok": true,
+      "behaviour_reason": null,
+      "behaviour_reason_ok": null,
+      "expected_filters": [
+        [
+          "US",
+          2024
+        ],
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "dispatched_filters": [
+        [
+          "US",
+          2024
+        ],
+        [
+          "UK",
+          2024
+        ]
+      ],
+      "filters_ok": true,
+      "sub_queries": [
+        {
+          "label": "US/2024",
+          "question": "What is the highest marginal income tax rate in the US for 2024?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What is the highest marginal income tax rate in the US for 2024?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "us_p17_2024|27",
+            "us_p17_2024|9",
+            "us_p17_2024|9",
+            "us_p17_2024|128",
+            "us_p17_2024|27",
+            "us_p17_2024|12",
+            "us_p17_2024|25",
+            "us_p17_2024|12"
+          ]
+        },
+        {
+          "label": "UK/2024",
+          "question": "What is the highest marginal income tax rate in England for 2024?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What is the highest marginal income tax rate in England for 2024?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "uk_rates_2024|6",
+            "uk_rates_2024|5",
+            "uk_rates_2024|7",
+            "uk_rates_2024|1",
+            "uk_rates_2024|4",
+            "uk_rates_2024|7",
+            "uk_rates_2024|5",
+            "uk_rates_2024|3"
+          ]
+        }
+      ],
+      "expected_contains": [
+        "37%",
+        "45%"
+      ],
+      "missing_contains": [],
+      "contains_ok": true,
+      "grounding_checked": 3,
+      "grounding_grounded": 3,
+      "violations": [],
+      "total_ms": 3125.4,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 4425,
+        "openai/gpt-oss-20b": 4069
+      },
+      "paced_s": 32.4,
+      "final_answer": "The highest marginal income tax rate in the United States for 2024 is 37% [1]. The highest marginal income tax rate in England for the 2024\u201125 tax year is 45% [2].\n\nSources:\n[1] IRS Publication 17 (2024), p.126\n[2] Income Tax rates and allowances for current and previous tax years (2024-25), \u00a75",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    },
+    {
+      "id": "q09",
+      "type": "needs_clarification",
+      "question": "What's the standard deduction?",
+      "expected_behavior": "clarify",
+      "observed_behavior": "clarify",
+      "behaviour_ok": true,
+      "behaviour_reason": "Which tax year would you like the standard deduction information for?",
+      "behaviour_reason_ok": true,
+      "expected_filters": [],
+      "dispatched_filters": [],
+      "filters_ok": null,
+      "sub_queries": [],
+      "expected_contains": [],
+      "missing_contains": [],
+      "contains_ok": null,
+      "grounding_checked": 0,
+      "grounding_grounded": 0,
+      "violations": [],
+      "total_ms": 845.5,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 1960
+      },
+      "paced_s": 33.9,
+      "final_answer": "Which tax year would you like the standard deduction information for?\n\n(I hold UK 2023-24, 2024-25; US 2023, 2024.)",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    },
+    {
+      "id": "q10",
+      "type": "needs_clarification",
+      "question": "I earn \u00a350,000 a year - which tax band am I in for 2024-25?",
+      "expected_behavior": "clarify",
+      "observed_behavior": "clarify",
+      "behaviour_ok": true,
+      "behaviour_reason": "Are you asking about the tax band for England/Wales/Northern Ireland (the rest of the UK) or for Scotland?",
+      "behaviour_reason_ok": true,
+      "expected_filters": [],
+      "dispatched_filters": [],
+      "filters_ok": null,
+      "sub_queries": [],
+      "expected_contains": [],
+      "missing_contains": [],
+      "contains_ok": null,
+      "grounding_checked": 0,
+      "grounding_grounded": 0,
+      "violations": [],
+      "total_ms": 749.4,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 1982
+      },
+      "paced_s": 0.0,
+      "final_answer": "Are you asking about the tax band for England/Wales/Northern Ireland (the rest of the UK) or for Scotland?\n\n(I hold UK 2023-24, 2024-25; US 2023, 2024.)",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    },
+    {
+      "id": "q11",
+      "type": "out_of_scope",
+      "question": "Should I take the standard deduction or itemise my deductions to minimise my tax bill?",
+      "expected_behavior": "refuse",
+      "observed_behavior": "refuse",
+      "behaviour_ok": true,
+      "behaviour_reason": "personalised_advice",
+      "behaviour_reason_ok": true,
+      "expected_filters": [],
+      "dispatched_filters": [],
+      "filters_ok": null,
+      "sub_queries": [],
+      "expected_contains": [],
+      "missing_contains": [],
+      "contains_ok": null,
+      "grounding_checked": 0,
+      "grounding_grounded": 0,
+      "violations": [],
+      "total_ms": 2220.1,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 2492
+      },
+      "paced_s": 12.5,
+      "final_answer": "I can't tell you which option is better for you - that's personalised tax advice, and it depends on figures this system doesn't have and isn't qualified to weigh. What I can do is show you the relevant rates and thresholds from the source documents, so ask me for those and decide with an adviser.\n\nI cannot provide personalised tax advice such as whether you should take the standard deduction or itemise your deductions.\n\nI hold UK 2023-24, 2024-25; US 2023, 2024.",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    },
+    {
+      "id": "q12",
+      "type": "out_of_scope",
+      "question": "What is the UK Personal Allowance for the 2026-27 tax year?",
+      "expected_behavior": "refuse",
+      "observed_behavior": "refuse",
+      "behaviour_ok": true,
+      "behaviour_reason": "year_not_in_corpus",
+      "behaviour_reason_ok": true,
+      "expected_filters": [],
+      "dispatched_filters": [],
+      "filters_ok": null,
+      "sub_queries": [],
+      "expected_contains": [],
+      "missing_contains": [],
+      "contains_ok": null,
+      "grounding_checked": 0,
+      "grounding_grounded": 0,
+      "violations": [],
+      "total_ms": 1082.7,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 1979
+      },
+      "paced_s": 18.5,
+      "final_answer": "I don't have that tax year in my corpus, so I can't answer from a source. I won't answer it from memory - that is exactly the case where a confident-sounding wrong figure does the most damage.\n\nI do not hold UK 2026-27. I have UK 2023-24, 2024-25; US 2023, 2024.",
+      "error": null,
+      "previous_turn": null,
+      "turn1_behavior": null,
+      "carried": null
+    }
+  ]
+}

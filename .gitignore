@@ -1,0 +1,21 @@
+# secrets — never commit
+.env
+.env.local
+
+# python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# data: raw sources are re-downloadable from manifest.yaml; chunks.jsonl is committed
+data/raw/
+data/chroma/
+data/.llm_cache/
+*.pkl
+
+# caches / os
+.hf_cache/
+.DS_Store
+Thumbs.db

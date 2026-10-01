@@ -1,0 +1,4 @@
+[server]
+# Disables the file watcher, which logs many torchvision errors when it scans
+# transformers. Restart to pick up changes, or pass --server.fileWatcherType auto.
+fileWatcherType = "none"

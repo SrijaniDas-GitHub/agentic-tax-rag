@@ -1,0 +1,132 @@
+{
+  "label": "followups",
+  "generated": "2026-09-22 06:29 UTC",
+  "config": {
+    "orchestrator": "runner",
+    "model": "openai/gpt-oss-120b",
+    "fast_model": "openai/gpt-oss-20b",
+    "allow_fast_model": "1",
+    "diversify_by_page": false,
+    "paced": true,
+    "cold": true,
+    "only": "",
+    "gold_total": 1,
+    "today": "2026-09-20",
+    "commit": "b812c33-dirty",
+    "followups": true
+  },
+  "aggregate": {
+    "n_questions": 1,
+    "n_attempted": 1,
+    "not_measured": [],
+    "n_answerable": 1,
+    "n_sub_queries": 1,
+    "filter_precision": 1.0,
+    "recall@8": 1.0,
+    "recall@8_attempt1": 1.0,
+    "answer_contains": 1.0,
+    "grounding_checked": 1,
+    "grounding_grounded": 1,
+    "grounding_violations": 0,
+    "violations_by_kind": {},
+    "behavioural_correct": 0,
+    "behavioural_n": 0,
+    "behavioural_in_gold": 0,
+    "behavioural_reason_correct": 0,
+    "retries_fired": 0,
+    "retries_recovered": 0,
+    "p50_latency_s": 2.23,
+    "max_latency_s": 2.23,
+    "tokens_total": 6109,
+    "errors": []
+  },
+  "latency": {
+    "cold_p50": 2.23,
+    "cold_max": 2.23,
+    "cached_p50": 0.08,
+    "cached_max": 0.08,
+    "paced_s": 2.7
+  },
+  "questions": [
+    {
+      "id": "f01",
+      "type": "follow_up",
+      "question": "and what about 2023?",
+      "expected_behavior": "answer",
+      "observed_behavior": "answer",
+      "behaviour_ok": true,
+      "behaviour_reason": null,
+      "behaviour_reason_ok": null,
+      "expected_filters": [
+        [
+          "US",
+          2023
+        ]
+      ],
+      "dispatched_filters": [
+        [
+          "US",
+          2023
+        ]
+      ],
+      "filters_ok": true,
+      "sub_queries": [
+        {
+          "label": "US/2023",
+          "question": "What is the standard deduction for a single filer?",
+          "attempts": 1,
+          "sufficient": true,
+          "queries_tried": [
+            "What is the standard deduction for a single filer?"
+          ],
+          "hit_attempt1": true,
+          "hit_final": true,
+          "pages_final": [
+            "us_p17_2023|96",
+            "us_p17_2023|96",
+            "us_p17_2023|98",
+            "us_p17_2023|95",
+            "us_p17_2023|98",
+            "us_p17_2023|95",
+            "us_p17_2023|95",
+            "us_p17_2023|96"
+          ]
+        }
+      ],
+      "expected_contains": [
+        "13,850"
+      ],
+      "missing_contains": [],
+      "contains_ok": true,
+      "grounding_checked": 1,
+      "grounding_grounded": 1,
+      "violations": [],
+      "total_ms": 2233.6,
+      "tokens_by_model": {
+        "openai/gpt-oss-120b": 3942,
+        "openai/gpt-oss-20b": 2167
+      },
+      "paced_s": 2.7,
+      "final_answer": "The standard deduction for a single filer in 2023 was $13,850 [1].\n\nSources:\n[1] IRS Publication 17 (2023), p.96",
+      "error": null,
+      "previous_turn": "q01",
+      "turn1_behavior": "answer",
+      "carried": {
+        "previous_question": "What is the 2024 standard deduction for a single filer?",
+        "countries": [
+          "US"
+        ],
+        "tax_years": [
+          "2024"
+        ],
+        "resolved": [
+          {
+            "country": "US",
+            "tax_year_key": 2024,
+            "tax_year_label": "2024"
+          }
+        ]
+      }
+    }
+  ]
+}

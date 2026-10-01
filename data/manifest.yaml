@@ -1,0 +1,94 @@
+# Corpus definition. Four documents, two countries, two tax years each.
+#
+# tax_year_key is the calendar year the tax year starts in:
+#   US TY2024   -> 2024        UK 2024-25 -> 2024
+# (HMRC labels documents by the year the tax year ends, and gov.uk column headers
+# read "2024 to 2025"; neither is the key.) ingest/manifest.py checks that
+# tax_year_label starts with tax_year_key.
+#
+# page = 1-based PDF index (what PyMuPDF gives). printed_page = page - page_offset,
+# for display only. The eval set's gold_pages compares against `page`.
+#
+# page_ranges is a list of inclusive ranges: the relevant material (filing
+# thresholds, filing status, standard deduction, rate schedules) is spread across
+# several clusters of pages. Ranges were picked by hand from the chapter map.
+
+# ---------------------------------------------------------------- US -----------
+# IRS publications are US Government works: public domain, no licence needed.
+
+- doc_id: us_p17_2024
+  country: US
+  tax_year_key: 2024
+  tax_year_label: "2024"
+  doc_title: "IRS Publication 17 (2024)"
+  short_title: "Pub 17"
+  url: "https://www.irs.gov/pub/irs-prior/p17--2024.pdf"
+  media: pdf
+  filename: p17--2024.pdf
+  # ch.1 filing requirements | ch.2 filing status | ch.10 standard deduction
+  # | ch.13 how to figure your tax | tax computation worksheet + rate schedules
+  page_ranges: [[8, 14], [23, 28], [95, 98], [109, 110], [126, 128]]
+  page_offset: 2        # pdf 98 -> printed 96
+  licence: "US Government work (public domain)"
+  sha256: 33a0cb93a183258bdf6ad6289c6ad599b276146da9e7ee7366c73b73ed7b2807
+  notes: "143 pages total. Table 10-1 (standard deduction) is on pdf 98; 2024 Tax Rate Schedules on pdf 128."
+
+- doc_id: us_p17_2023
+  country: US
+  tax_year_key: 2023
+  tax_year_label: "2023"
+  doc_title: "IRS Publication 17 (2023)"
+  short_title: "Pub 17"
+  url: "https://www.irs.gov/pub/irs-prior/p17--2023.pdf"
+  media: pdf
+  filename: p17--2023.pdf
+  # Same chapters as 2024; ch.2 ends a page earlier and the rate schedules sit at 127.
+  page_ranges: [[8, 14], [23, 27], [95, 98], [109, 110], [126, 127]]
+  page_offset: 2        # pdf 98 -> printed 96
+  licence: "US Government work (public domain)"
+  sha256: 01b4e7a90a5c7031bb8ef66036a13af75117658f4c94b0157fc360fb33cf425e
+  notes: "142 pages total. 2023 Tax Rate Schedules on pdf 127, one page earlier than the 2024 edition."
+
+# ---------------------------------------------------------------- UK -----------
+# The gov.uk rates page is fetched via the Content API. It is HTML, and it lists
+# several tax years as columns of the same tables, so both UK entries point at one
+# file and parse.py keeps only each entry's own year column.
+#
+# `page` here is a 1-based heading-section index, not a PDF page; page_offset is
+# null because a web page has no printed page number.
+#
+# The per-year SA110 "Tax calculation summary notes" PDFs were considered but are
+# fill-in worksheets rather than rate tables.
+
+- doc_id: uk_rates_2024
+  country: UK
+  tax_year_key: 2024
+  tax_year_label: "2024-25"
+  doc_title: "Income Tax rates and allowances for current and previous tax years (2024-25)"
+  short_title: "gov.uk rates"
+  url: "https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past"
+  fetch_url: "https://www.gov.uk/api/content/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past"
+  media: govuk
+  filename: uk_income_tax_rates.json
+  # Sections: personal allowances, rate bands (rUK + Scotland), dividends.
+  page_ranges: [[1, 7]]
+  page_offset: null
+  licence: "Open Government Licence v3.0"
+  sha256: 11e2b85ff30ef9b813c7545a35b8b5ac952bd78b2cad5d1646ed5d99eba74169
+  notes: "Year column projected from the shared page: '2024 to 2025'. Living page - it drops the oldest year each April, which is why data/chunks.jsonl is committed."
+
+- doc_id: uk_rates_2023
+  country: UK
+  tax_year_key: 2023
+  tax_year_label: "2023-24"
+  doc_title: "Income Tax rates and allowances for current and previous tax years (2023-24)"
+  short_title: "gov.uk rates"
+  url: "https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past"
+  fetch_url: "https://www.gov.uk/api/content/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past"
+  media: govuk
+  filename: uk_income_tax_rates.json
+  page_ranges: [[1, 7]]
+  page_offset: null
+  licence: "Open Government Licence v3.0"
+  sha256: 11e2b85ff30ef9b813c7545a35b8b5ac952bd78b2cad5d1646ed5d99eba74169
+  notes: "Year column projected from the shared page: '2023 to 2024'. Oldest year the live page still carries as of 2026-09."
